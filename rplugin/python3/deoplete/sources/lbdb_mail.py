@@ -48,4 +48,4 @@ class Source(Base):
             except ValueError:
                 continue
             results.append({'word': mail, 'info': name + ' ' + department})
-         return results
+        return results
