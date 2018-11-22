@@ -29,12 +29,10 @@ class Source(Base):
         return max(colon.end() if colon is not None else -1,
                    comma.end() if comma is not None else -1)
 
-    # TODO: caching?
     def gather_candidates(self, context):
         ret = self.HEADER_PATTERN.search(context['input']) 
-        if ret is None:
-            return
-
+        if ret is None or ret[2] is '':
+            return 
         try:
             cmd = self.command + [ret[2]]
             command_results = subprocess.check_output(cmd, universal_newlines=True).split('\n')
