@@ -30,17 +30,20 @@ class Source(Base):
                    comma.end() if comma is not None else -1)
 
     def gather_candidates(self, context):
-        ret = self.HEADER_PATTERN.search(context['input']) 
-        if ret is None or ret[2] is '':
+        ret = self.HEADER_PATTERN.search(context['input'])
+        if ret is None:
+            return
+        retn = ret[2].strip()
+        if len(retn) < 3:
             return 
         try:
-            cmd = self.command + [ret[2]]
+            cmd = self.command + [retn]
             command_results = subprocess.check_output(cmd, universal_newlines=True).split('\n')
         except CalledProcessError:
             return
 
         results = []
-        for row in command_results:
+        for row in command_results[1:]:
             try:
                 mail, name, department = row.split('\t')
             except ValueError:
