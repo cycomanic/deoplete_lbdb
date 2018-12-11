@@ -7,7 +7,7 @@ from .base import Base
 class Source(Base):
     COLON_PATTERN = re.compile(r':\s?')
     COMMA_PATTERN = re.compile(r'.+,\s?')
-    HEADER_PATTERN = re.compile(r'^(Bcc|Cc|From|Reply-To|To):(\s?|\(.+\),\s?)')
+    HEADER_PATTERN = re.compile(r'^(Bcc|Cc|From|Reply-To|To):(\s?.+\s?)')
 
     def __init__(self, vim):
         super().__init__(vim)
