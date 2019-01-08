@@ -12,7 +12,7 @@ class Source(Base):
     def __init__(self, vim):
         super().__init__(vim)
 
-        self.rank = 75  # default is 100, give deoplete-abook priority
+        self.rank = 101  # default is 100, give deoplete-abook priority
         self.name = 'lbdb'
         self.mark = '[lbdb]'
         self.min_pattern_length = 0
@@ -48,5 +48,5 @@ class Source(Base):
                 mail, name, department = row.split('\t')
             except ValueError:
                 continue
-            results.append({'word': mail, 'info': name + ' ' + department})
+            results.append({'word': "{0} <{1}>".format(name, mail), 'info': department})
         return results
