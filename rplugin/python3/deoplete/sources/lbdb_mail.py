@@ -34,7 +34,7 @@ class Source(Base):
         if ret is None:
             return
         retn = ret[2].strip().split(',')[-1]
-        if len(retn) < 3:
+        if len(retn) < 5:
             return 
         try:
             cmd = self.command + [retn]
